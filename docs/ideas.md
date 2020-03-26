@@ -14,4 +14,5 @@
 	Our main idea for the website is to recommend existing movies to the users when they want to find some existing category of the movie, such as action movie, we can list out films such as Fast and Furious, The Avengers, etc. We find the inspiration from websites like IMDB, or Rotten Tomatoes, etc. 
 
 5. Important Components:
-
+	- The Movie database: In order to have something to recommend, we must have a database of movies to start with.
+	- Back-end relates to sorting movies, and recommending movies according to the category.
