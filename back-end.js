@@ -1,7 +1,6 @@
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-  
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-  }
+var button = document.getElementById("filter_button");
+button.onclick = showList;
+
+function showList() {
+    document.getElementById("foptions").classList.toggle("show");
+}
