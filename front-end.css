@@ -1,16 +1,17 @@
-.login_button {
+.overall_containers {
+  padding: 20px 20px 20px 20px;
+  background-color: white;
+  color: black;
+}
+
+.header .login_button {
   float: right;
-  padding-right: 50px;
 }
 
-.containers {
-  padding: 50px 50px 50px 50px;
-}
-
+/*Navigation bar CSS section*/
 .navbar {
   overflow: hidden;
   background-color: #333;
-  color: white
 }
 
 .navbar a {
@@ -18,7 +19,6 @@
   font-size: 16px;
   color: white;
   text-align: center;
-  padding: 4px 6px;
   text-decoration: none;
 }
 
@@ -26,3 +26,42 @@
   float: left;
   overflow: hidden;
 }
+
+.dropdown .filter_button {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 4px 6px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.filter_content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.filter_content a {
+  float: none;
+  color: white;
+  padding: 4px 6px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.filter_content a:hover {
+  background-color: red;
+}
+
+.dropdown:hover .filter_content {
+  display: block;
+}
+
+/* End Navigation bar CSS Section */

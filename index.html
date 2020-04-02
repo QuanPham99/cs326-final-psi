@@ -4,69 +4,80 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="front-end.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
         <title>Movie Recommendation</title>
     </head>
 
     <body>
-        <header>
-            <div class="header">
-                <h1>Movie Recommender</h1>
-
-                <!--Log in button-->
-                <div class="login_button">
-                    Login Button goes here
-                </div>
-                <!--End Log in button-->
+        <div class="overall_containers">
+            <div class="head_title">
+                <a href="#" style="text-decoration:none; color:black;"><h1>Movie Recommender</h1></a>
             </div>
-        </header>
-
-        <!--- Begin Containers-->
-        <div class='containers'>            
-            <!--- Begin Navigation bar-->
-            <div class="navbar">
-                <a href="#">Top picks</a>
-                <a href="#">Just For you</a>
-                <a href="#">Something More</a>
-                <div class="dropdown">
-                    <button class="filter_button">Filter
-                        <form>
-                        </form>
-                    </button>
-                </div>
-                <!--- End Navigation bar-->
+            
+            <!--Log in button-->
+            <!--Make the button floats right-->
+            <div class="login_button">
+                Login Button goes here
             </div>
+            <!--End Log in button-->
 
             <p></p>
-
-            <div class="body_webpage">
-                <div class="content">
-                    <div class="action_movies">
-                        <!-- A Link to the romantic categories-->
-                        <a href="#">Action movies goes here</a>
-                        <p>Along with pictures of the movies</p>
+            <!--- Begin Containers-->
+            <div class='containers'>            
+                <!--- Begin Navigation bar-->
+                <div class="navbar">
+                    <a href="#">Top picks</a>
+                    <a href="#">Just For you</a>
+                    <a href="#">Something More</a>
+                    <div class="dropdown">
+                        <button class="filter_button">Filter
+                            <i class="fa fa-filter"></i>
+                        </button>
+                        <div class="filter_content">
+                            <a href="#">This is 1</a>
+                            <a href="#">This is 2</a>
+                        </div>
                     </div>
-                    
-                    <div class="romantic_movies">
-                        <!-- A Link to the romantic categories-->
-                        <a href="#">Romantic movies goes here</a>
-                        <p>Along with pictures of the movies</p>
-                    </div>
+                    <!--- End Navigation bar-->
+                </div>
 
-                    <div class="comedy_movies">
-                        <!-- A Link to the comedy categories-->
-                        <a href="#">Comedy</a>
-                        <p>Along with pictures of the movies</p>
+                <div class="search">
+                    <p>Can't find anything? Search the movie of your own</p>
+                    <form>
+                        <input type="text" name="search" placeholder="Search..">
+                    </form>
+                </div>
+
+                <div class="body_webpage">
+                    <div class="content">
+                        <div class="action_movies">
+                            <!-- A Link to the romantic categories-->
+                            <a href="#">Action movies goes here</a>
+                            <p>Along with pictures of the movies</p>
+                        </div>
+                        
+                        <div class="romantic_movies">
+                            <!-- A Link to the romantic categories-->
+                            <a href="#">Romantic movies goes here</a>
+                            <p>Along with pictures of the movies</p>
+                        </div>
+
+                        <div class="comedy_movies">
+                            <!-- A Link to the comedy categories-->
+                            <a href="#">Comedy</a>
+                            <p>Along with pictures of the movies</p>
+                        </div>
                     </div>
                 </div>
+                
+                
+
+
+
+            <!--- End Containers-->
             </div>
-            
-            
 
 
-
-        <!--- End Containers-->
         </div>
 
         <footer>
