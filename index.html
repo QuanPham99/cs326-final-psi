@@ -12,70 +12,54 @@
     <body>
         <!--- Begin Containers-->
         <header>
-            <table>
-                <tr>
-                    <td><h1>Movie Recommender</h1></td>
-                    <!--- Begin Login Options --->
-                        <!--- Quoc Anh --->
-                        <!-- Make this float right in the corner of the screen-->
-                    <th>Login Button goes here</th>
-                    <!--- End Login Options --->
-                </tr>
-
-
-            </table>
+            <div class="header">
+                <h1>Movie Recommender</h1>
+                <div class="login_button">
+                    Login Button goes here
+                </div>
+            </div>
         </header>
 
         <div class='containers'>            
-            <!--- Begin Features bar-->
-            <p>
-                <!-- Thao Trinh -->
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th colspan="4"></h2>Search the most interesting films at the moment</h2></th>
-                        
-                        <!--- Begin Search Bar --->
-                        <!--- Quan Pham --->
-                        <th scope="col">
-                            <form>
-                                <input type="text" id="input-content" placeholder="Search ...">
-                                <button type="submit" id="search-content"><i class="fa fa-search"></i></button>
-                            </form>
-                        </th>
-                        <!--- End Search Bar --->
-                    </tr>
-                    <tr>
-                        <th scope="col">#</th> <!--To be changed-->
-                        <th scope="col">First</th> <!--To be changed-->
-                        <th scope="col">Last</th> <!--To be changed-->
-                        <th scope="col">Handle</th> <!--To be fixed-->
-                        
-                        <!-- Filter Button -->
-                        <th scope="col">
-                            <div class="dropdown">
-                                <button class="filter_button">Filter 
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <div class="dropdown_options" id="foptions">
-                                    <p>Year</p>
-                                    <input type="range" min="1950" max="2020" value="1980">
-                                    <p>Another Features</p>
-                                    <P>Another Features</P>
-                                </dib>
-                            </div>
-                        </th> 
-                        <!-- End Filter Button 
-                        -->
-                    </tr>
-                </thead>
-              </table>
-            </p>
-            <!--- End Features bar-->
+            <!--- Begin Navigation bar-->
+            <div class="navbar">
+                <a href="#">Top picks</a>
+                <a href="#">Just For you</a>
+                <a href="#">Something More</a>
+                <div class="dropdown">
+                    <button class="filter_button">Filter
+                        <form>
+                        </form>
+                    </button>
+                </div>
+                <!--- End Navigation bar-->
+            </div>
+
+            <p></p>
+
+            <div class="body_webpage">
+                <div class="content">
+                    <div class="action_movies">
+                        <!-- A Link to the romantic categories-->
+                        <a href="#">Action movies goes here</a>
+                        <p>Along with pictures of the movies</p>
+                    </div>
+                    
+                    <div class="romantic_movies">
+                        <!-- A Link to the romantic categories-->
+                        <a href="#">Romantic movies goes here</a>
+                        <p>Along with pictures of the movies</p>
+                    </div>
+
+                    <div class="comedy_movies">
+                        <!-- A Link to the comedy categories-->
+                        <a href="#">Comedy</a>
+                        <p>Along with pictures of the movies</p>
+                    </div>
+                </div>
+            </div>
             
-            <p>
-                Content of the page goes her
-            </p>
+            
 
 
 
