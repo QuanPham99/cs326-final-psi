@@ -18,6 +18,7 @@ User Interaction:
         * They will also be rated (5 stars) based on how they well treat that people.  
         
     + Disabilities people:
+        * If they choose they are disabled person, they can skip all of the information credential input steps. 
         * Logging in and creating an account will be easier with some features assistance (will be figured out along the way). They can choose their type of disablities to give more information for the assistance (This is optional since someone might not feel comfortable sharing it).
         * They will select from a fixed number of options of tasks and then press FIND to find someone (for now the number of tasks will only be simple with: buy groceries, do chores, walking).
         * Then they will wait for the assistance to accept the tasks and perform it.
