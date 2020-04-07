@@ -8,22 +8,66 @@
         <title>DISABLER</title>
     </head>
     <body>
-    <div class="container">
+    <div class="container-sm">
         <div class="row">
-            <div class="col-8">
+            <div class="col-10">
                 <h1>DISABLER</h1>
             </div>
-            <div class="col-4">
-                Login button
+            <div class="col-1">
+                <button class="button login-button">Login</button>
             </div>
-            <div class="col-4">
-                Signup button
+            <div class="col-1">
+                <button class="button signup-button">Signup</button>
             </div>
         </div>
+
+        <!--Nav Bar-->
+        <div class="row">
+            <div class="navbar">
+                <div class="col-4"><a href="#">Home Page</a></div>
+                <div class="col-2"><a href="#">About</a></div>
+                <div class="col-3"><a href="#">Contact</a></div>
+                <div class="col-2"><a href="#">Setting</a></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="options-box">
+                    <div class="col">
+                        <p>What tasks do you want us to help you today?</p>
+                        <form>
+                            <input type="checkbox">
+                            <label for="basic-chores"> Basic Chores</label><br>
+                            
+                            <input type="checkbox">
+                            <label for="groceries"> Buying Groceries</label><br>
+                            
+                            <input type="checkbox">
+                            <label for="cleaning"> Cleaning up</label><br>
+                            
+                            <input type="checkbox">
+                            <label for="other"> Other</label><br>
+                            <input type="textarea" placeholder="Please specify!">
+                            <label for="other-text"></label><br><br>
+
+                            <input type="button" value="FIND">
+                        </form>
+                    </div>
+                </div>
+                <div class="col">
+                    <div id="map" class='map'>This is a google maps</div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 
-
-
+    <script async defer
+    src="map.js">
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
