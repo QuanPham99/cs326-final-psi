@@ -43,3 +43,8 @@ User Interaction:
     + This is the overall layout of the website, we are working on how to input the map into out website, as well as fixing the background color (due to time constraint, so this would take sometimes before the deadline)
     
     ![](../img/Homepage.png)
+
+
+- Person in charge of the html+css:
+  + Quan Pham: HTML Overall Layout for the homepage.
+  + Quoc Anh Bui: HTML for login, signup and forget password.
