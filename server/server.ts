@@ -1,9 +1,15 @@
-var faker = require('faker');
+let http = require('http');
+let url = require('url');
 
+export class MyServer {
+    private customerDb;
+    private assistanceDb;
+    private server;
 
-var random_firstName = faker.name.firstName();
-var random_lastName = faker.name.lastName();
-var random_phoneNum = faker.phone.phoneNumber();
-
-console.log("random name:" + random_firstName + " " + random_lastName);
-console.log("random phone:" + random_phoneNum);
+    constructor(db1, db2) {
+        this.customerDb = db1;
+        this.assistanceDb = db2;
+        this.server = http.createServer();
+        this.server.on('request', this.handler.bind(this));
+    }
+}
