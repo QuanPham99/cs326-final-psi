@@ -1,15 +1,36 @@
 let http = require('http');
 let url = require('url');
+let express = require('express');
 
 export class MyServer {
-    private customerDb;
+    // 2 databases for cus/ass
     private assistanceDb;
-    private server;
+    private server = express();
+    private port = 8080;
+    private router = express.Router();
 
-    constructor(db1, db2) {
-        this.customerDb = db1;
-        this.assistanceDb = db2;
+    constructor(db1) {
+        this.assistanceDb = db1;
         this.server = http.createServer();
-        this.server.on('request', this.handler.bind(this));
+        this.server.use('/', express.static('./html'));
+		this.router.get('/create', this.createHandler.bind(this));
     }
+
+    public listen(port) : void {
+        this.server.lsiten(port);
+    }
+
+    private async createHandler(request, response, next) : Promise<void> {
+        await this.createUsers(request.query.username, request.query.value, response);
+    }
+
+    public async createUsers(username: string, value: object, response) : Promise<void> {
+        console.log("username="+username+"object="+value);
+        await this.assistanceDb.put(username, value);
+        response.write(JSON.stringify({'username' : username,
+                                        'value' : value }));
+        response.end();
+    }
+
+
 }
