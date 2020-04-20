@@ -12,12 +12,14 @@ export class MyServer {
     constructor(db1) {
         this.assistanceDb = db1;
         this.server = http.createServer();
-        this.server.use('/', express.static('./html'));
+        // this.server.use('/', express.static('./html'));
+        this.router.get('/', function(req, res){ res.send("Birds")});
 		this.router.get('/create', this.createHandler.bind(this));
     }
 
     public listen(port) : void {
-        this.server.lsiten(port);
+        this.server.listen(port);
+        console.log("Listening to port", port);
     }
 
     private async createHandler(request, response, next) : Promise<void> {
