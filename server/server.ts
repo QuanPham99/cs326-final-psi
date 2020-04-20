@@ -6,18 +6,27 @@ export class MyServer {
     // 2 databases for cus/ass
     private assistanceDb;
     private server = express();
-    private port = 8080;
+    private port = 52330;
     private router = express.Router();
 
     constructor(db1) {
         this.assistanceDb = db1;
         this.server = http.createServer();
-        this.server.use('/', express.static('./html'));
-		this.router.get('/create', this.createHandler.bind(this));
+        //this.server.use('/', express.static('./html'));
+        this.router.use((request, response, next) => {
+			response.header('Content-Type','application/json');
+			response.header('Access-Control-Allow-Origin', '*');
+			response.header('Access-Control-Allow-Headers', '*');
+			next();
+        });
+        
+        // Serve static pages from a particular path.
+        // this.server.use('/', express.static('public'));
+        
     }
 
     public listen(port) : void {
-        this.server.lsiten(port);
+        this.server.listen(port);
     }
 
     private async createHandler(request, response, next) : Promise<void> {
@@ -31,6 +40,6 @@ export class MyServer {
                                         'value' : value }));
         response.end();
     }
-
+    
 
 }
