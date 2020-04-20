@@ -97,21 +97,25 @@
     </script>
     <head>
         <title>Customer Signup</title>
+        <script src="../backend/back-end.js"></script>
+
     </head>
     <body>
         <div class= "form-container">
             <div id= "msg">Sign up successfull!</div>
-            <ul class= "list">
-                <li><h1 style="font-family: Arial, Helvetica, sans-serif;">Assistant Signup</h1></li>
-                <li><input type= "text" name= "First Name" placeholder="First Name"></li>
-                <li><input type= "text" name= "Last Name" placeholder="Last Name"></li>
-                <li><input type= "tel" name= "Phone Number" placeholder="Phone Number"></li>
-                <li><input type= "email" name= "Email" placeholder="Email Address"></li>
-                <li><input type= "password" name= "Password" placeholder="Password"></li>
-                <li><input type= "button" name= "Sign up" value= "Sign Up" onclick="myFunction()"></li>
-            </ul>
-        </div>
+            <form method="GET" action="../homepage/homepage.html">
+                <ul class= "list">
+                    <li><h1 style="font-family: Arial, Helvetica, sans-serif;">Assistant Signup</h1></li>
+                    <li><input type= "text" name= "fName" placeholder="First Name"></li>
+                    <li><input type= "text" name= ";Name" placeholder="Last Name"></li>
+                    <li><input type= "tel" name= "phoneNumber" placeholder="Phone Number"></li>
+                    <li><input type= "text" name= "addr" placeholder="Address"></li>
+                    <li><input type= "password" name= "Password" placeholder="Password"></li>
+                    <li><input type= "submit" name= "SignUp" value= "Sign Up" onclick="userCreated()"></li>
+                </ul>
+            </form>
 
+        </div>
     </body>
 
 </html>
