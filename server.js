@@ -45,7 +45,7 @@ var MyServer = /** @class */ (function () {
         var _this = this;
         // Server stuff, use express instead of http.createServer
         this.server = express();
-        this.port = 8080;
+        this.port = process.env.PORT || 8080;
         this.router = express.Router();
         this.theDatabase = db;
         this.router.use(function (request, response, next) {
