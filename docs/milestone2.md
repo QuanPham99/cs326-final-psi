@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Milestone 2: Server and Database #
 ## Application Overview ##
 Recall that we are building an application that helps user (customer) to find the neareast assistants in their local area with their tasks. 
@@ -30,3 +31,14 @@ The request that we choose to implement is called ```Find```:
 ### Labor Division ###
 - Quan Pham: ```server.ts``` and ```client.js```.
 - Quoc Anh Bui: ```customerdb.ts``` and ```assistantdb.ts```.
+=======
+Part 0: API Planning
+
+
+Part 1: Back-end Skeleton Code
+
+Part 2: Front-end Implementation
+- Since for our website 
+
+Part 3: Deployment
+>>>>>>> 2354811912a902a621ee8902bd8ffb795e8b24c9
