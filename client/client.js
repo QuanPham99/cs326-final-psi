@@ -1,5 +1,5 @@
 // URL
-const url = "http://localhost:8080/homepage";
+const url = "https://polar-caverns-77542.herokuapp.com/";
 
 // NEW: helper method for posting data
 async function postData(url, data) {

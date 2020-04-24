@@ -1,1 +1,1 @@
-web: node client.js
+web: npx ts-node main_server.ts
