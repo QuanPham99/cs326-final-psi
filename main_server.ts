@@ -1,6 +1,6 @@
 'use-strict';
 
-import { CustomerDB } from "./Database/customerdb";
+import { CustomerDB } from "./customerdb";
 import { MyServer } from "./server";
 
 const theDatabase = new CustomerDB('QuanPham99');
