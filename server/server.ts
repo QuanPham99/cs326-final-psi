@@ -12,11 +12,6 @@ export class MyServer {
     constructor(db1) {
         this.assistanceDb = db1;
         this.server = http.createServer();
-<<<<<<< HEAD
-        // this.server.use('/', express.static('./html'));
-        this.router.get('/', function(req, res){ res.send("Birds")});
-		this.router.get('/create', this.createHandler.bind(this));
-=======
         //this.server.use('/', express.static('./html'));
         this.router.use((request, response, next) => {
 			response.header('Content-Type','application/json');
@@ -25,18 +20,15 @@ export class MyServer {
 			next();
         });
         
+        // HANDLE REQUESTS:
         // Serve static pages from a particular path.
         // this.server.use('/', express.static('public'));
         
->>>>>>> b930d1b1f83c459e75c4a753a3ad231ca13fa143
     }
 
     public listen(port) : void {
         this.server.listen(port);
-<<<<<<< HEAD
-        console.log("Listening to port", port);
-=======
->>>>>>> b930d1b1f83c459e75c4a753a3ad231ca13fa143
+        console.log("Listening to port " + port);
     }
 
     private async createHandler(request, response, next) : Promise<void> {
