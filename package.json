@@ -1,7 +1,7 @@
 {
   "name": "cs326-final-psi",
   "version": "1.0.0",
-  "main": "./client/client.js",
+  "main": "main_server.js",
   "directories": {
     "doc": "docs"
   },
@@ -29,6 +29,9 @@
     "mongodb": "^3.5.6",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": "13.9.0"
   },
   "devDependencies": {},
   "description": ""
