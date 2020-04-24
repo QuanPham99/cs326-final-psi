@@ -42,8 +42,6 @@ export class MyServer {
     
     private async errorHandler(request, response, next) : Promise<void> {
         let value : boolean = await this.theDatabase.isFound(request.body.username);
-        Object.keys(request.body).forEach((prop)=> console.log("Request body: " + prop));
-		//	console.log("result from database.isFound: " + JSON.stringify(value));
 		if (!value) {
 			response.write(JSON.stringify({'result' : 'error'}));
 			response.end();
@@ -69,6 +67,4 @@ export class MyServer {
         }));
         response.end();
     }
-
-
 }
