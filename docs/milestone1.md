@@ -7,8 +7,6 @@ Description:
     
     Currently there is a similar app, which is Red Panic button. However, it's more of an emergency problems for the people. Also, there are several more apps that helps people with specific disability, like DPA: helps people with traveling, HelpTalk: helps people with speech impairment, etc. But there are still no solution to the help with the basic needs for the disabilities.
 
-
-Innovative Idea:
     The apps style is similar to Uber, but instead of asking for rides, the disabilites will ask for assistance around the neighborhood, with the design of clicking options, instead of typing down, thus this would help more people with disabilities. People around the neighborhood will be pinged when someone request something and help them with the task.
 
 User Interaction:
