@@ -39,7 +39,6 @@ exports.__esModule = true;
 var http = require('http');
 var url = require('url');
 var express = require('express');
-var faker = require('faker');
 var MyServer = /** @class */ (function () {
     function MyServer(db) {
         var _this = this;

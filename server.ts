@@ -3,7 +3,6 @@ import { resolveTypeReferenceDirective } from "typescript";
 let http = require('http');
 let url = require('url');
 let express = require('express');
-let faker = require('faker');
 
 export class MyServer {
     // 2 databases for cus/ass
