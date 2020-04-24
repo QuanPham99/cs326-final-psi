@@ -65,7 +65,7 @@ var MyServer = /** @class */ (function () {
                 return [2 /*return*/];
             });
         }); });
-        //this.server.use('/homepage', this.router);
+        this.server.use('/', this.router);
     }
     MyServer.prototype.errorHandler = function (request, response, next) {
         return __awaiter(this, void 0, void 0, function () {
@@ -75,8 +75,6 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.theDatabase.isFound(request.body.username)];
                     case 1:
                         value = _a.sent();
-                        Object.keys(request.body).forEach(function (prop) { return console.log("Request body: " + prop); });
-                        //	console.log("result from database.isFound: " + JSON.stringify(value));
                         if (!value) {
                             response.write(JSON.stringify({ 'result': 'error' }));
                             response.end();

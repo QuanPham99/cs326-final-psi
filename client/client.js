@@ -15,13 +15,15 @@ async function postData(url, data) {
                                  redirect: 'follow',
                                  body: JSON.stringify(data)
                              });
+    console.log("Response from post " + resp);
+    console.log("Data: " + JSON.stringify(data));
     return resp;
 }
 
 
 function findMatch() {
     (async () => {
-        let username = document.getElementById('username').value;
+        let username = document.getElementById("username").value;
         
         const data = {'username' : username};
         const newURL = url + "/users/" + username + "/find";
@@ -31,7 +33,7 @@ function findMatch() {
         const resp = await postData(newURL, data);
 
         const j = await resp.json();
-
+        console.log("j= " + j);
         if (j['result'] !== 'error') {
             document.getElementById("output").innerHTML = "101: Server listen succesfully";
             document.getElementById("output_name").innerHTML = "Username " + j['username']+ " is available.";

@@ -27,7 +27,6 @@ export class MyServer {
         this.server.use('/', express.static("./client"));
         this.server.use(express.json());
 
-
         // Set handlers for a route y
         this.router.post('/users/:userId/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
 
@@ -36,8 +35,7 @@ export class MyServer {
             response.send(JSON.stringify({ "result" : "command-not-found"}));
         });
 
-        //this.server.use('/homepage', this.router);
-
+        this.server.use('/', this.router);
     }
     
     private async errorHandler(request, response, next) : Promise<void> {
