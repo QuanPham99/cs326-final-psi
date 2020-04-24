@@ -66,7 +66,7 @@ var MyServer = /** @class */ (function () {
                 return [2 /*return*/];
             });
         }); });
-        this.server.use('/homepage', this.router);
+        //this.server.use('/homepage', this.router);
     }
     MyServer.prototype.errorHandler = function (request, response, next) {
         return __awaiter(this, void 0, void 0, function () {

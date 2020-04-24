@@ -37,7 +37,7 @@ export class MyServer {
             response.send(JSON.stringify({ "result" : "command-not-found"}));
         });
 
-        this.server.use('/homepage', this.router);
+        //this.server.use('/homepage', this.router);
 
     }
     
