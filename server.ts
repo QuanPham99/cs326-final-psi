@@ -6,15 +6,17 @@ let express = require('express');
 
 export class MyServer {
     // 2 databases for cus/ass
-    private theDatabase;
+    private customerDatabase;
+    private assistantDatabase;
 
     // Server stuff, use express instead of http.createServer
     private server = express();
     private port = process.env.PORT || 8080;
     private router = express.Router();
 
-    constructor(db) {
-        this.theDatabase = db;
+    constructor(customerdb, assistantdb) {
+        this.customerDatabase = customerdb;
+        this.assistantDatabase = assistantdb;
 
         this.router.use((request, response, next) => {
 			response.header('Content-Type','application/json');
