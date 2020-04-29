@@ -42,7 +42,7 @@ export class MyServer {
     }
     
     private async errorHandler(request, response, next) : Promise<void> {
-        let value : boolean = await this.theDatabase.isFound(request.body.username);
+        let value : boolean = await this.customerDatabase.isFound(request.body.username);
 		if (!value) {
 			response.write(JSON.stringify({'result' : 'error'}));
 			response.end();
@@ -65,7 +65,7 @@ export class MyServer {
     }
 
     public async findMatch(username: string, response) : Promise<void> {
-        let val = await this.theDatabase.get(username);
+        let val = await this.customerDatabase.get(username);
         response.write(JSON.stringify({
             'result' : 'match',
             'username' : username,
@@ -75,6 +75,7 @@ export class MyServer {
     }
 
     public async userLogin(username: string, password: string, response) : Promise<void> {
+<<<<<<< HEAD
         let value = await this.theDatabase.get(username);
         let pass = value.passowrd;
 
@@ -92,5 +93,13 @@ export class MyServer {
 
             }));
         }
+=======
+        let name = await this.customerDatabase.get(username);
+        response.write(JSON.stringify({
+            'result' : 'match',
+            'username' : name,
+        }));
+        response.end();
+>>>>>>> 94b649ce2f01f01f29eb2b49d0fe337453e65db6
     }
 }
