@@ -73,11 +73,22 @@ export class MyServer {
     }
 
     public async userLogin(username: string, password: string, response) : Promise<void> {
-        let name = await this.theDatabase.get(username);
-        response.write(JSON.stringify({
-            'result' : 'match',
-            'username' : name,
-        }));
-        response.end();
+        let value = await this.theDatabase.get(username);
+        let pass = value.passowrd;
+
+        if (password === pass) {
+            response.write(JSON.stringify({
+                'result' : 'match',
+                'username' : username,
+                'value' : pass
+            }));
+        }
+        else {
+            response.write(JSON.stringify({
+                'result' : 'incorrect',
+                'username' : username,
+
+            }));
+        }
     }
 }
