@@ -51,10 +51,12 @@
     </style>
     <head>
         <title>Login Page</title>
+        <script src="client.js"></script>
+
     </head>
     <body>
         <div class= "form-container">
-            <form action="../homepage/homepage.html" methodd="GET">
+            <form methodd="GET">
                 <ul class= "list">
                     <li><h1 style="font-family: Arial, Helvetica, sans-serif;">Member Login</h1></li>
                     <li><input type="text" name='username' placeholder="Username" id="username"></li>
@@ -62,8 +64,8 @@
                     <li><input type= "text" name= "lName" placeholder="Last Name" id ="lName"></li>
                     <li><input type= "text" name= "addr" placeholder="Home Address" id="address"></li>-->
                     <li><input type= "password" name= "password" placeholder="Password" id="pw"></li>
-                    <li><button onclick="logIn()"></button></li>
-                    <li><input type= "submit" name= "Submit" value= "Login"></li>
+                    <li><button onclick="userLogin()">Log In</button></li>
+                    <!-- <li><input type= "submit" name= "Submit" value= "Login"></li>-->
                     <li><p id="output"></p></li>
                     <li><a href= "/passwordforget.html" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif; color: red; text-decoration: none">Forget Password?</a></li>
                     <li style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">Don't have an account yet?</li>
@@ -74,7 +76,6 @@
             
         </div>
 
-    <script src="client.js"></script>
     </body>
 
 </html>

@@ -10,7 +10,7 @@ export class MyServer {
 
     // Server stuff, use express instead of http.createServer
     private server = express();
-    private port = process.env.PORT;
+    private port = process.env.PORT || 8080;
     private router = express.Router();
 
     constructor(db) {
@@ -29,6 +29,7 @@ export class MyServer {
 
         // Set handlers for a route y
         this.router.post('/users/:userId/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
+        this.router.post('/users/:userId/login', this.loginHandler.bind(this));
 
         // Set a fall through handler if nothing matches
         this.router.post("*", async (request, response) => {
@@ -47,8 +48,13 @@ export class MyServer {
 			next();
 		}
     }
+    
     private async matchHandler(request, response) : Promise<void> {
         await this.findMatch(request.body.username , response);
+    }
+
+    private async loginHandler(request, response) : Promise<void> {
+        await this.userLogin(request.body.username, request.body.password, response);
     }
 
     public listen(port) : void {
@@ -62,6 +68,15 @@ export class MyServer {
             'result' : 'match',
             'username' : username,
             'value' : val
+        }));
+        response.end();
+    }
+
+    public async userLogin(username: string, password: string, response) : Promise<void> {
+        let name = await this.theDatabase.get(username);
+        response.write(JSON.stringify({
+            'result' : 'match',
+            'username' : name,
         }));
         response.end();
     }

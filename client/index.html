@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="options-box">
                     <div class="col">
-                        <p>Hello, username!</p>
+                        <p id="login_username"></p>
                         <p>What tasks do you want us to help you today?</p>
                         <form action= "/find" method="POST">
                             <label for="username">Type in the name of the user below:</label>
@@ -119,6 +119,7 @@
                             
                             <br />
                             <button onclick="findMatch()" class="btn btn-primary" type="button">FIND</button>
+                            <br />
                         </form>
                     </div>
                 </div>
@@ -133,9 +134,9 @@
                     <div class="col"><img src="../img/puppy1.webp" alt="dog image"></div>
                     <div class="col">Personal Information:
                         <ul>
-                            <li><p id="output" style="font-size: xx-large;"></p></li>
-                            <li><p id="output_name" style="font-size: xx-large;"></p></li>
-                            <li><p id="output_addr" style="font-size: xx-large;"></p></li>
+                            <p id="output"></p>
+                            <p id="output_name"></p>
+                            <p id="output_addr"></p>
                         </ul>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 // URL
-const url = "https://polar-caverns-77542.herokuapp.com";
+//const url = "https://polar-caverns-77542.herokuapp.com";
+const url = "http://localhost:8080";
 
 // NEW: helper method for posting data
 async function postData(url, data) {
@@ -33,17 +34,42 @@ function findMatch() {
         const resp = await postData(newURL, data);
 
         const j = await resp.json();
-        console.log("j= " + j);
+
         if (j['result'] !== 'error') {
-            document.getElementById("output").innerHTML = "101: Server listen succesfully";
-            document.getElementById("output_name").innerHTML = "Username " + j['username']+ " is available.";
-            document.getElementById("output_addr").innerHTML = j['username'] + " is at city " + j['value']['a'];
+            document.getElementById("output_name").innerHTML = "<li> Username " + j['username']+ " is available. </li>";
+            document.getElementById("output_addr").innerHTML = "<li>" + j['username'] + " is at city " + j['value']['a'] + "</li>";
         }
         else {
-            document.getElementById('output').innerHTML = "100: Error " + username + " not found.";
+            document.getElementById('output').innerHTML = "<li> 100: Error " + username + " not found. </li>";
             document.getElementById("output_name").innerHTML = "";
             document.getElementById("output_addr").innerHTML = "";
         }
+    })();
+}
+
+function userLogin() {
+    (async () => {
+
+        window.open(url, "_blank");
+
+        // let username = document.getElementById("username").value;
+        // let password = document.getElementById("pw").value;
+
+        // const data = {'username' : username, 'password' : password};
+        // const newURL = url + "/users" + username + "/login";
+
+        // console.log("user log in: fetching " + newURL);
+        // const resp = await postData(newURL, data);
+
+        // const j = await resp.json();
+
+        // if (j['result'] !== 'error') {
+        //     document.getElementById("output").innerHTML = "Greetings" + j['username'] + ". Welcome back";
+        //     window.open(url, '_blank');
+        // }
+        // else {
+
+        // }
     })();
 }
 
