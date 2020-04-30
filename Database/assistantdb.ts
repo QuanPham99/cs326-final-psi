@@ -32,24 +32,48 @@ export class AssistantDB {
 		(async () => {
 			await this.client.connect().catch(err => { console.log(err); });
 		})();
-		
     }
 
     /* Description of document - "Assistant" in the database:
         User/Assistant: First Name, Last Name, Address, Phone Number, Password.
         {
-            username: 'key' - input
+			username: 'key' - input
+			password: 
             value: {
                 First:..
                 Last: ...
                 Address: ...
                 Phone: ...
-                Password: ...
             }
         }
     */
 
 
+	/* findMatch: Returns the array of assistants that live in the same city of the requested customer.
+		returned info: 
+		{
+			First + Last Name,
+			Address,
+			Phone Number,
+		}
+		if no assistant exists, returns null
+	*/
+	public async findMatch(city: string){
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+
+		console.log("findMatch: city = " + city);
+
+		let cursorDB = await collection.find({'value.Address': city});
+		let result = cursorDB.toArray();
+
+		if (result){
+			console.log("Found " + result.length + "assistants in " + city);
+			return result.value;
+		}else{
+			return null;
+		}
+	}
 	/* Create a new single document using: updateOne(filter= {'key'}, update= {$set : {'new attribute'}, {'upsert': true}})
     upsert: true so that if nothing matches the "filter", new document will be added. */
     public async put(username: string, value: object) : Promise<void> {
@@ -105,4 +129,5 @@ export class AssistantDB {
 			return true;
 		}
 	}
+	
 }
