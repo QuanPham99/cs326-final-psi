@@ -36,6 +36,7 @@ function findMatch() {
         const j = await resp.json();
 
         if (j['result'] !== 'error') {
+            document.getElementById('output').innerHTML = "<li> 101: " + username + " found. </li>";
             document.getElementById("output_name").innerHTML = "<li> Username " + j['username']+ " is available. </li>";
             document.getElementById("output_addr").innerHTML = "<li>" + j['username'] + " is at city " + j['value']['a'] + "</li>";
         }
@@ -49,27 +50,30 @@ function findMatch() {
 
 function userLogin() {
     (async () => {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("pw").value;
 
-        window.open(url, "_blank");
+        console.log("Username from website:", username);
 
-        // let username = document.getElementById("username").value;
-        // let password = document.getElementById("pw").value;
+        const data = {'username' : username, 'password' : password};
+        const newURL = url + "/login";
 
-        // const data = {'username' : username, 'password' : password};
-        // const newURL = url + "/users" + username + "/login";
+        console.log("user log in: fetching " + newURL);
+        const resp = await postData(newURL, data);
 
-        // console.log("user log in: fetching " + newURL);
-        // const resp = await postData(newURL, data);
+        const j = await resp.json();
 
-        // const j = await resp.json();
-
-        // if (j['result'] !== 'error') {
-        //     document.getElementById("output").innerHTML = "Greetings" + j['username'] + ". Welcome back";
-        //     window.open(url, '_blank');
-        // }
-        // else {
-
-        // }
+        if (j['result'] !== 'error') {
+            if (j['result'] === 'match') {
+                window.open(url, '_blank');
+            }
+            else if (j['result'] === 'incorrect-password') {
+                document.getElementById("output").innerHTML = "Incorrect Password";
+            }
+        }
+        else {
+            document.getElementById("output").innerHTML = "Incorrect Password";
+        }
     })();
 }
 

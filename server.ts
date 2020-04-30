@@ -11,7 +11,7 @@ export class MyServer {
 
     // Server stuff, use express instead of http.createServer
     private server = express();
-    private port = process.env.PORT || 8080;
+    private port = 8080;
     private router = express.Router();
 
     constructor(customerdb, assistantdb) {
@@ -31,7 +31,7 @@ export class MyServer {
 
         // Set handlers for a route y
         this.router.post('/users/:userId/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
-        this.router.post('/users/:userId/login', this.loginHandler.bind(this));
+        this.router.get('/login', this.loginHandler.bind(this));
 
         // Set a fall through handler if nothing matches
         this.router.post("*", async (request, response) => {
@@ -42,7 +42,7 @@ export class MyServer {
     }
     
     private async errorHandler(request, response, next) : Promise<void> {
-        let value : boolean = await this.customerDatabase.isFound(request.body.username);
+        let value : boolean = await this.assistantDatabase.isFound(request.body.username);
 		if (!value) {
 			response.write(JSON.stringify({'result' : 'error'}));
 			response.end();
@@ -65,41 +65,65 @@ export class MyServer {
     }
 
     public async findMatch(username: string, response) : Promise<void> {
-        let val = await this.customerDatabase.get(username);
+        let val = await this.assistantDatabase.get(username);
+        console.log("finding");
         response.write(JSON.stringify({
             'result' : 'match',
             'username' : username,
             'value' : val
         }));
         response.end();
+        
+
     }
 
     public async userLogin(username: string, password: string, response) : Promise<void> {
-<<<<<<< HEAD
-        let value = await this.theDatabase.get(username);
-        let pass = value.passowrd;
+        console.log("Inside Log in");
+        let customer_value = await this.customerDatabase.get(username);
+        let assistant_value = await this.assistantDatabase.get(username);
 
-        if (password === pass) {
-            response.write(JSON.stringify({
-                'result' : 'match',
-                'username' : username,
-                'value' : pass
-            }));
+        if (customer_value !== null && assistant_value === null) {
+            let pass = customer_value.a;
+            if (pass === password) {
+                response.write(JSON.stringify({
+                    'result' : 'match',
+                    'username' : username,
+                    'value' : customer_value
+                }));
+                response.end();
+            }
+            else {
+                response.write(JSON.stringify({
+                    'result' : 'incorrect-password',
+                    'username' : username
+                }));
+                response.end();
+            }
         }
-        else {
+        else if (customer_value === null && assistant_value !== null) {
+            let pass = assistant_value.a;
+            if (pass === password) {
+                response.write(JSON.stringify({
+                    'result' : 'match',
+                    'username' : username,
+                    'value' : assistant_value
+                }));
+                response.end();
+            }
+            else {
+                response.write(JSON.stringify({
+                    'result' : 'incorrect-password',
+                    'username' : username
+                }));
+                response.end();
+            }
+        }
+        else if (customer_value === null && assistant_value === null) {
             response.write(JSON.stringify({
-                'result' : 'incorrect',
-                'username' : username,
+                'result' : 'error',
+            }));
+            response.end();
+        }
 
-            }));
-        }
-=======
-        let name = await this.customerDatabase.get(username);
-        response.write(JSON.stringify({
-            'result' : 'match',
-            'username' : name,
-        }));
-        response.end();
->>>>>>> 94b649ce2f01f01f29eb2b49d0fe337453e65db6
     }
 }

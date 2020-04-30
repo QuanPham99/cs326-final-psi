@@ -2,7 +2,7 @@ export class AssistantDB {
 
 	private MongoClient = require('mongodb').MongoClient;
 	// URI to the cloud database of MongoDB:
-	private uri = "mongodb+srv://alanbui2808:<hlkimdung123>@appcluster-bauga.mongodb.net/test?retryWrites=true&w=majority";
+	private uri = "mongodb+srv://alanbui2808:circxsqR8gVSUls9@appcluster-bauga.mongodb.net/test?retryWrites=true&w=majority";
     private client;
 	private collectionName : string;
 	// Name of the database (could be altered)
@@ -29,7 +29,10 @@ export class AssistantDB {
 		// (async () => {
 		// 	await this.client.connect().catch(err => { console.log(err); });
 		// })();
-		this.client.connect();
+		(async () => {
+			await this.client.connect().catch(err => { console.log(err); });
+		})();
+		
     }
 
     /* Description of document - "Assistant" in the database:
@@ -48,15 +51,16 @@ export class AssistantDB {
 
 
 	/* Create a new single document using: updateOne(filter= {'key'}, update= {$set : {'new attribute'}, {'upsert': true}})
-    upsert: true so that if nothing matches the "filter", new document will be added.*/
+    upsert: true so that if nothing matches the "filter", new document will be added. */
     public async put(username: string, value: object) : Promise<void> {
+		console.log("Hello inside get");
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("put: username = " + username + ", value = " + value);
 
 		// Check if the document exists, if not insert one with "username: username"
 		let document = await collection.findOne({'username': username});
-		if(document == false){
+		if(!(document)){
 			await collection.insertOne({'username': username});
 		}
 		let result = await collection.updateOne({'username' : username}, { $set : { 'value' : value} }, { 'upsert' : true } );
@@ -65,10 +69,11 @@ export class AssistantDB {
 
 	// Get a single document using: findOne('filter') 
     public async get(username: string) : Promise<string> {
-		let db = this.client.db(this.dbName); // this.level(this.dbFile);
+		console.log("inside get");
+		let db = this.client.db(this.dbName); 
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + username);
-		let result = await collection.findOne({'name' : username });
+		let result = await collection.findOne({'username' : username });
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result.value;
@@ -86,10 +91,10 @@ export class AssistantDB {
 		let result = await collection.deleteOne({'username' : username});
 		
 		console.log("result = " + result);
-	// await this.db.del(key);
+		// await this.db.del(key);
     }
 	
-	// Check if a single document exists using: isFound('f)
+	// Check if a single document exists using: findOne() in "get" method
     public async isFound(username: string) : Promise<boolean>  {
 		console.log("isFound: key = " + username);
 		let v = await this.get(username);
@@ -99,5 +104,5 @@ export class AssistantDB {
 		} else {
 			return true;
 		}
-    }
+	}
 }
