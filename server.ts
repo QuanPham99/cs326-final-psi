@@ -32,13 +32,15 @@ export class MyServer {
         // Static pages from a particular path
         // this.server.use('/', express.static("./client"));
         this.server.use('/', express.static("./client"));
-        this.server.use('/login', this.loginRequest.bind(this));
 
         this.server.use(express.json());
 
         // Set handlers for a route
+        // Handle the login page
+        this.server.post('/login', this.loginRequest.bind(this));
+
         this.router.post('/users/:userId/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
-        this.router.post('/:userId//userLogin', [this.errorHandler.bind(this), this.loginHandler.bind(this)]);
+        this.router.post('/dosth', this.loginHandler.bind(this));
 
         // Set a fall through handler if nothing matches
         this.router.post("*", async (request, response) => {
@@ -61,7 +63,6 @@ export class MyServer {
     private async loginRequest(request, response, next) : Promise<void> {
         console.log("listening from login request function");
         response.sendFile(path.join(__dirname + '/client/login.html'));
-        console.log("Cannot reach this line!");
     }
 
     private async matchHandler(request, response) : Promise<void> {
@@ -91,8 +92,6 @@ export class MyServer {
     }
 
     public async userLogin(username : string, password : string, response) : Promise<void> {
-        console.log("username: " + username);
-        console.log("password: " + password);
         console.log("This is redirecting");
         response.redirect("/");
         response.end();

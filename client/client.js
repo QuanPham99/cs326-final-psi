@@ -51,34 +51,35 @@ function findMatch() {
 
 // https://www.sitepoint.com/local-authentication-using-passport-node-js/
 
-function userLogin() {
-    (async () => {
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("pw").value;
+// function userLogin() {
+//     (async () => {
+//         let username = document.getElementById("username").value;
+//         let password = document.getElementById("pw").value;
 
-        console.log("Username from website:", username);
+//         console.log("Username from the URL:", username);
+//         console.log("Password from the URL: ", password)
+//         const data = {'username' : username, 'password' : password};
 
-        const data = {'username' : username, 'password' : password};
-        const newURL = url + "/username" + username + "/userLogin";
+//         const newURL = url + "/username" + username + "/login";
 
-        console.log("user log in: fetching " + newURL);
-        const resp = await postData(newURL, data);
+//         console.log("user log in: fetching " + newURL);
+//         const resp = await postData(newURL, data);
 
-        const j = await resp.json();
+//         const j = await resp.json();
 
-        if (j['result'] !== 'error') {
-            if (j['result'] === 'match') {
-                window.open(url, '_blank');
-            }
-            else if (j['result'] === 'incorrect-password') {
-                document.getElementById("output").innerHTML = "Incorrect Password";
-            }
-        }
-        else {
-            document.getElementById("output").innerHTML = "Incorrect Password";
-        }
-    })();
-}
+//         if (j['result'] !== 'error') {
+//             if (j['result'] === 'match') {
+//                 window.open(url, '_blank');
+//             }
+//             else if (j['result'] === 'incorrect-password') {
+//                 document.getElementById("output").innerHTML = "Incorrect Password";
+//             }
+//         }
+//         else {
+//             document.getElementById("output").innerHTML = "Incorrect Password";
+//         }
+//     })();
+// }
 
 
 
