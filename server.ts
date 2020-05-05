@@ -3,6 +3,7 @@ import { resolveTypeReferenceDirective } from "typescript";
 let http = require('http');
 let url = require('url');
 let express = require('express');
+let path = require('path');
 
 export class MyServer {
     // 2 databases for cus/ass
@@ -11,12 +12,15 @@ export class MyServer {
 
     // Server stuff, use express instead of http.createServer
     private server = express();
-    private port = 8080;
+    private port = process.env.PORT || 8080;
     private router = express.Router();
 
     constructor(customerdb, assistantdb) {
         this.customerDatabase = customerdb;
         this.assistantDatabase = assistantdb;
+
+        this.server.engine('html', require('ejs').renderFile);
+        this.server.set('view engine', 'html');
 
         this.router.use((request, response, next) => {
 			response.header('Content-Type','application/json');
@@ -26,12 +30,15 @@ export class MyServer {
         });
 
         // Static pages from a particular path
+        // this.server.use('/', express.static("./client"));
         this.server.use('/', express.static("./client"));
+        this.server.use('/login', this.loginRequest.bind(this));
+
         this.server.use(express.json());
 
-        // Set handlers for a route y
+        // Set handlers for a route
         this.router.post('/users/:userId/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
-        this.router.get('/login', this.loginHandler.bind(this));
+        this.router.post('/:userId//userLogin', [this.errorHandler.bind(this), this.loginHandler.bind(this)]);
 
         // Set a fall through handler if nothing matches
         this.router.post("*", async (request, response) => {
@@ -51,11 +58,19 @@ export class MyServer {
 		}
     }
     
+    private async loginRequest(request, response, next) : Promise<void> {
+        console.log("listening from login request function");
+        response.sendFile(path.join(__dirname + '/client/login.html'));
+        console.log("Cannot reach this line!");
+    }
+
     private async matchHandler(request, response) : Promise<void> {
         await this.findMatch(request.body.username , response);
     }
 
     private async loginHandler(request, response) : Promise<void> {
+        console.log("Username :" + request.body.username);
+        console.log("Passs : " + request.body.password);
         await this.userLogin(request.body.username, request.body.password, response);
     }
 
@@ -64,66 +79,22 @@ export class MyServer {
         this.server.listen(port);
     }
 
-    public async findMatch(username: string, response) : Promise<void> {
-        let val = await this.assistantDatabase.get(username);
+    public async findMatch(city: string, response) : Promise<void> {
+        let val = await this.assistantDatabase.findMatch(city);
         console.log("finding");
         response.write(JSON.stringify({
             'result' : 'match',
-            'username' : username,
+            'city' : city,
             'value' : val
         }));
         response.end();
-        
-
     }
 
-    public async userLogin(username: string, password: string, response) : Promise<void> {
-        console.log("Inside Log in");
-        let customer_value = await this.customerDatabase.get(username);
-        let assistant_value = await this.assistantDatabase.get(username);
-
-        if (customer_value !== null && assistant_value === null) {
-            let pass = customer_value.a;
-            if (pass === password) {
-                response.write(JSON.stringify({
-                    'result' : 'match',
-                    'username' : username,
-                    'value' : customer_value
-                }));
-                response.end();
-            }
-            else {
-                response.write(JSON.stringify({
-                    'result' : 'incorrect-password',
-                    'username' : username
-                }));
-                response.end();
-            }
-        }
-        else if (customer_value === null && assistant_value !== null) {
-            let pass = assistant_value.a;
-            if (pass === password) {
-                response.write(JSON.stringify({
-                    'result' : 'match',
-                    'username' : username,
-                    'value' : assistant_value
-                }));
-                response.end();
-            }
-            else {
-                response.write(JSON.stringify({
-                    'result' : 'incorrect-password',
-                    'username' : username
-                }));
-                response.end();
-            }
-        }
-        else if (customer_value === null && assistant_value === null) {
-            response.write(JSON.stringify({
-                'result' : 'error',
-            }));
-            response.end();
-        }
-
+    public async userLogin(username : string, password : string, response) : Promise<void> {
+        console.log("username: " + username);
+        console.log("password: " + password);
+        console.log("This is redirecting");
+        response.redirect("/");
+        response.end();
     }
 }

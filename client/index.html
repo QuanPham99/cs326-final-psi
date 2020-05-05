@@ -81,11 +81,15 @@
                 <h1>DISABLER</h1>
                 <div class="row">
                     <div class="col">
-                        <button class="button login-button"><a href="/login.html" style="text-decoration: none; color: black;">Login</a></button>
-                        
+                        <form action="/login" method="POST">
+                            <button class="button login-button" type='submit'>Login</button>
+                        </form>
                     </div>
+                    
                     <div class="col">
-                        <button class="button signup-button"><a href="/login.html" style="text-decoration: none; color: black">Signup</a></button>
+                        <form action="/login" method="POST">
+                            <button class="button signup-button">Signup</button>
+                        </form>
                     </div>
                 </div>
             </div>

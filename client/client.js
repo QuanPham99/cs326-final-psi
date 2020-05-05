@@ -48,6 +48,9 @@ function findMatch() {
     })();
 }
 
+
+// https://www.sitepoint.com/local-authentication-using-passport-node-js/
+
 function userLogin() {
     (async () => {
         let username = document.getElementById("username").value;
@@ -56,7 +59,7 @@ function userLogin() {
         console.log("Username from website:", username);
 
         const data = {'username' : username, 'password' : password};
-        const newURL = url + "/login";
+        const newURL = url + "/username" + username + "/userLogin";
 
         console.log("user log in: fetching " + newURL);
         const resp = await postData(newURL, data);
@@ -76,8 +79,6 @@ function userLogin() {
         }
     })();
 }
-
-
 
 
 
