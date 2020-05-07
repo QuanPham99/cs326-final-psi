@@ -44,11 +44,11 @@ function findMatch() {
                 document.getElementById("output").innerHTML = "There is an assistants in " + city + " city. ";    
             }
             else if (j['value'].length > 1) {
-                document.getElementById("output").innerHTML = "There are " + j['value'].length + " assistant in " + city + " city unfortunately.";    
+                document.getElementById("output").innerHTML = "There are " + j['value'].length + " assistant in " + city + " city.";    
             }
             else if (j['value'].length == 0) {
-                document.getElementById("output").innerHTML = "Unfortunately there are not any assistant in " + city + " city.";    
-
+                document.getElementById("output").innerHTML = "Unfortunately there are not any assistant in this " + city + " city.";    
+ 
             }
 
             var html = "";
@@ -81,7 +81,6 @@ function userLogin() {
         const data = {'username' : username, 'password' : password};
 
         const newURL = url + "/login";
-        // const newURL = url + "/login";
 
         console.log("user log in: fetching " + newURL);
         const resp = await postData(newURL, data);
