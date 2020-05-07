@@ -1,8 +1,10 @@
+var secret = require('../secret.json');
+
 export class AssistantDB {
 
 	private MongoClient = require('mongodb').MongoClient;
 	// URI to the cloud database of MongoDB:
-	private uri = "mongodb+srv://alanbui2808:circxsqR8gVSUls9@appcluster-bauga.mongodb.net/test?retryWrites=true&w=majority";
+	private uri = secret.URI;
     private client;
 	private collectionName : string;
 	// Name of the database (could be altered)
@@ -58,26 +60,27 @@ export class AssistantDB {
 		}
 		if no assistant exists, returns null
 	*/
-	public async findMatch(city: string){
-		let db = this.client.db(this.dbName);
-		let collection = db.collection(this.collectionName);
+	// public async findMatch(city: string){
+	// 	let db = this.client.db(this.dbName);
+	// 	let collection = db.collection(this.collectionName);
 
-		console.log("findMatch: city = " + city);
+	// 	console.log("findMatch: city = " + city);
 
-		let cursorDB = await collection.find({'value.Address': city});
-		let result = cursorDB.toArray();
+	// 	let cursorDB = await collection.find({'value.a': city});
+	// 	let result = cursorDB.toArray();
 
-		if (result){
-			console.log("Found " + result.length + "assistants in " + city);
-			return result.value;
-		}else{
-			return null;
-		}
-	}
+	// 	if (result){
+	// 		console.log("Found " + result.length + " assistants in " + city);
+	// 		return result.value;
+	// 	} else {
+	// 		return null;
+	// 	}
+	// }
+
+
 	/* Create a new single document using: updateOne(filter= {'key'}, update= {$set : {'new attribute'}, {'upsert': true}})
     upsert: true so that if nothing matches the "filter", new document will be added. */
     public async put(username: string, value: object) : Promise<void> {
-		console.log("Hello inside get");
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("put: username = " + username + ", value = " + value);
@@ -92,19 +95,37 @@ export class AssistantDB {
     }
 
 	// Get a single document using: findOne('filter') 
-    public async get(username: string) : Promise<string> {
-		console.log("inside get");
-		let db = this.client.db(this.dbName); 
+    // public async get(username: string) : Promise<string> {
+	// 	console.log("inside get");
+	// 	let db = this.client.db(this.dbName); 
+	// 	let collection = db.collection(this.collectionName);
+	// 	console.log("get: key = " + username);
+	// 	let result = await collection.findOne({'username' : username });
+	// 	console.log("get: returned " + JSON.stringify(result));
+	// 	if (result) {
+	// 		return result.value;
+	// 	} else {
+	// 		return null;
+	// 	}
+	// }
+	
+	public async get(city : string) : Promise<any> {
+		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
-		console.log("get: key = " + username);
-		let result = await collection.findOne({'username' : username });
-		console.log("get: returned " + JSON.stringify(result));
-		if (result) {
-			return result.value;
+
+		console.log("findMatch: city = " + city);
+		let cursorDB = await collection.find({"value.a": city});
+
+		let result = await cursorDB.toArray();
+		// let result = cursorDB;
+
+		if (result !== null){
+			console.log("Found " + result.length + " assistant in " + city);
+			return result;
 		} else {
 			return null;
 		}
-    }
+	}
 	
 	// Delete a single document using: deleteOne('filter')
     public async del(username: string) : Promise<void> {
@@ -119,9 +140,9 @@ export class AssistantDB {
     }
 	
 	// Check if a single document exists using: findOne() in "get" method
-    public async isFound(username: string) : Promise<boolean>  {
-		console.log("isFound: key = " + username);
-		let v = await this.get(username);
+    public async isFound(city: string) : Promise<boolean>  {
+		console.log("isFound: key = " + city);
+		let v = await this.get(city);
 		console.log("is found result = " + v);
 		if (v === null) {
 			return false;

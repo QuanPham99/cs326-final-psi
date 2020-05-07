@@ -1,8 +1,10 @@
+var secret = require('../secret.json');
+
 export class CustomerDB {
 
 	private MongoClient = require('mongodb').MongoClient;
 	// URI to the cloud database of MongoDB:
-    private uri = "mongodb+srv://alanbui2808:circxsqR8gVSUls9@appcluster-bauga.mongodb.net/test?retryWrites=true&w=majority";
+    private uri = secret.URI;
     public client;
 	public collectionName : string;
 	// Name of the database (could be altered)

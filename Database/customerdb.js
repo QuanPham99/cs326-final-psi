@@ -36,12 +36,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var secret = require('../secret.json');
 var CustomerDB = /** @class */ (function () {
     function CustomerDB(collectionName) {
         var _this = this;
         this.MongoClient = require('mongodb').MongoClient;
         // URI to the cloud database of MongoDB:
-        this.uri = "mongodb+srv://alanbui2808:circxsqR8gVSUls9@appcluster-bauga.mongodb.net/test?retryWrites=true&w=majority";
+        this.uri = secret.URI;
         // Name of the database (could be altered)
         this.dbName = "CustomerDB";
         this.collectionName = collectionName;
@@ -80,12 +81,12 @@ var CustomerDB = /** @class */ (function () {
         User/Assistant: First Name, Last Name, Address, Phone Number, Password.
         {
             username: 'key' - input
+            password: ...
             value: {
                 First:..
                 Last: ...
                 Address: ...
                 Phone: ...
-                Password: ...
             }
         }
     */

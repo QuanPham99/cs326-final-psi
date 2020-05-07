@@ -39,14 +39,18 @@ exports.__esModule = true;
 var http = require('http');
 var url = require('url');
 var express = require('express');
+var path = require('path');
 var MyServer = /** @class */ (function () {
-    function MyServer(db) {
+    function MyServer(customerdb, assistantdb) {
         var _this = this;
         // Server stuff, use express instead of http.createServer
         this.server = express();
-        this.port = process.env.PORT;
+        this.port = process.env.PORT || 8080;
         this.router = express.Router();
-        this.theDatabase = db;
+        this.customerDatabase = customerdb;
+        this.assistantDatabase = assistantdb;
+        this.server.engine('html', require('ejs').renderFile);
+        this.server.set('view engine', 'html');
         this.router.use(function (request, response, next) {
             response.header('Content-Type', 'application/json');
             response.header('Access-Control-Allow-Origin', '*');
@@ -54,10 +58,12 @@ var MyServer = /** @class */ (function () {
             next();
         });
         // Static pages from a particular path
+        // this.server.use('/', express.static("./client"));
         this.server.use('/', express.static("./client"));
         this.server.use(express.json());
-        // Set handlers for a route y
-        this.router.post('/users/:userId/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
+        // Set handlers for a route
+        // Handle the login page
+        this.router.post('/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
         // Set a fall through handler if nothing matches
         this.router.post("*", function (request, response) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -72,7 +78,7 @@ var MyServer = /** @class */ (function () {
             var value;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.theDatabase.isFound(request.body.username)];
+                    case 0: return [4 /*yield*/, this.assistantDatabase.isFound(request.body.city)];
                     case 1:
                         value = _a.sent();
                         if (!value) {
@@ -91,7 +97,9 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.findMatch(request.body.username, response)];
+                    case 0:
+                        console.log("Requested city: " + request.body.city);
+                        return [4 /*yield*/, this.findMatch(request.body.city, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -103,17 +111,19 @@ var MyServer = /** @class */ (function () {
         console.log("Server listening at " + port);
         this.server.listen(port);
     };
-    MyServer.prototype.findMatch = function (username, response) {
+    MyServer.prototype.findMatch = function (city, response) {
         return __awaiter(this, void 0, void 0, function () {
             var val;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.theDatabase.get(username)];
+                    case 0: return [4 /*yield*/, this.assistantDatabase.get(city)];
                     case 1:
                         val = _a.sent();
+                        console.log("finding");
+                        console.log("Value after finding= ", val);
                         response.write(JSON.stringify({
                             'result': 'match',
-                            'username': username,
+                            'city': city,
                             'value': val
                         }));
                         response.end();

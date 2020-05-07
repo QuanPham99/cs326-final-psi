@@ -32,15 +32,11 @@ export class MyServer {
         // Static pages from a particular path
         // this.server.use('/', express.static("./client"));
         this.server.use('/', express.static("./client"));
-
         this.server.use(express.json());
 
         // Set handlers for a route
         // Handle the login page
-        this.server.post('/login', this.loginRequest.bind(this));
-
-        this.router.post('/users/:userId/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
-        this.router.post('/dosth', this.loginHandler.bind(this));
+        this.router.post('/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
 
         // Set a fall through handler if nothing matches
         this.router.post("*", async (request, response) => {
@@ -51,7 +47,7 @@ export class MyServer {
     }
     
     private async errorHandler(request, response, next) : Promise<void> {
-        let value : boolean = await this.assistantDatabase.isFound(request.body.username);
+        let value : boolean = await this.assistantDatabase.isFound(request.body.city);
 		if (!value) {
 			response.write(JSON.stringify({'result' : 'error'}));
 			response.end();
@@ -60,19 +56,9 @@ export class MyServer {
 		}
     }
     
-    private async loginRequest(request, response, next) : Promise<void> {
-        console.log("listening from login request function");
-        response.sendFile(path.join(__dirname + '/client/login.html'));
-    }
-
     private async matchHandler(request, response) : Promise<void> {
-        await this.findMatch(request.body.username , response);
-    }
-
-    private async loginHandler(request, response) : Promise<void> {
-        console.log("Username :" + request.body.username);
-        console.log("Passs : " + request.body.password);
-        await this.userLogin(request.body.username, request.body.password, response);
+        console.log("Requested city: " + request.body.city);
+        await this.findMatch(request.body.city, response);
     }
 
     public listen(port) : void {
@@ -81,8 +67,9 @@ export class MyServer {
     }
 
     public async findMatch(city: string, response) : Promise<void> {
-        let val = await this.assistantDatabase.findMatch(city);
+        let val = await this.assistantDatabase.get(city);
         console.log("finding");
+        console.log("Value after finding= ", val);
         response.write(JSON.stringify({
             'result' : 'match',
             'city' : city,
@@ -91,9 +78,4 @@ export class MyServer {
         response.end();
     }
 
-    public async userLogin(username : string, password : string, response) : Promise<void> {
-        console.log("This is redirecting");
-        response.redirect("/");
-        response.end();
-    }
 }

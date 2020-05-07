@@ -81,15 +81,11 @@
                 <h1>DISABLER</h1>
                 <div class="row">
                     <div class="col">
-                        <form action="/login" method="POST">
-                            <button class="button login-button" type='submit'>Login</button>
-                        </form> 
+                            <button class="button login-button" type='submit'><a href="login.html">Login</a></button>
                     </div>
                     
                     <div class="col">
-                        <form action="/login" method="POST">
-                            <button class="button signup-button">Signup</button>
-                        </form>
+                        <button class="button signup-button"><a href="login.html">Signup</a></button>
                     </div>
                 </div>
             </div>
@@ -100,8 +96,8 @@
                         <p id="login_username"></p>
                         <p>What tasks do you want us to help you today?</p>
                         <form action= "/find" method="POST">
-                            <label for="username">Type in the name of the user below:</label>
-                            <input name="username" id="username" class="form-control" placeholder="user">
+                            <label for="city">Enter your city:</label>
+                            <input name="city" id="city" class="form-control" placeholder="City">
 
 
                             <input type="checkbox">
@@ -127,6 +123,7 @@
                         </form>
                     </div>
                 </div>
+                <br />
                 <div class="col">
                     <div id="map" class='map'>This is a google map</div>
                 </div>
@@ -137,11 +134,8 @@
                 <div class="row">
                     <div class="col"><img src="../img/puppy1.webp" alt="dog image"></div>
                     <div class="col">Personal Information:
-                        <ul>
-                            <p id="output"></p>
-                            <p id="output_name"></p>
-                            <p id="output_addr"></p>
-                        </ul>
+                        <p id="output"></p>
+                        <p id="output_name"></p>
                     </div>
                 </div>
             </div>

@@ -36,12 +36,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var secret = require('../secret.json');
 var AssistantDB = /** @class */ (function () {
     function AssistantDB(collectionName) {
         var _this = this;
         this.MongoClient = require('mongodb').MongoClient;
         // URI to the cloud database of MongoDB:
-        this.uri = "mongodb+srv://alanbui2808:circxsqR8gVSUls9@appcluster-bauga.mongodb.net/test?retryWrites=true&w=majority";
+        this.uri = secret.URI;
         // Name of the database (could be altered)
         this.dbName = "AssistantDB";
         this.collectionName = collectionName;
@@ -96,31 +97,19 @@ var AssistantDB = /** @class */ (function () {
         }
         if no assistant exists, returns null
     */
-    AssistantDB.prototype.findMatch = function (city) {
-        return __awaiter(this, void 0, void 0, function () {
-            var db, collection, cursorDB, result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        console.log("findMatch: city = " + city);
-                        return [4 /*yield*/, collection.find({ 'value.Address': city })];
-                    case 1:
-                        cursorDB = _a.sent();
-                        result = cursorDB.toArray();
-                        if (result) {
-                            console.log("Found " + result.length + "assistants in " + city);
-                            return [2 /*return*/, result.value];
-                        }
-                        else {
-                            return [2 /*return*/, null];
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
+    // public async findMatch(city: string){
+    // 	let db = this.client.db(this.dbName);
+    // 	let collection = db.collection(this.collectionName);
+    // 	console.log("findMatch: city = " + city);
+    // 	let cursorDB = await collection.find({'value.a': city});
+    // 	let result = cursorDB.toArray();
+    // 	if (result){
+    // 		console.log("Found " + result.length + " assistants in " + city);
+    // 		return result.value;
+    // 	} else {
+    // 		return null;
+    // 	}
+    // }
     /* Create a new single document using: updateOne(filter= {'key'}, update= {$set : {'new attribute'}, {'upsert': true}})
     upsert: true so that if nothing matches the "filter", new document will be added. */
     AssistantDB.prototype.put = function (username, value) {
@@ -129,7 +118,6 @@ var AssistantDB = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Hello inside get");
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("put: username = " + username + ", value = " + value);
@@ -151,22 +139,38 @@ var AssistantDB = /** @class */ (function () {
         });
     };
     // Get a single document using: findOne('filter') 
-    AssistantDB.prototype.get = function (username) {
+    // public async get(username: string) : Promise<string> {
+    // 	console.log("inside get");
+    // 	let db = this.client.db(this.dbName); 
+    // 	let collection = db.collection(this.collectionName);
+    // 	console.log("get: key = " + username);
+    // 	let result = await collection.findOne({'username' : username });
+    // 	console.log("get: returned " + JSON.stringify(result));
+    // 	if (result) {
+    // 		return result.value;
+    // 	} else {
+    // 		return null;
+    // 	}
+    // }
+    AssistantDB.prototype.get = function (city) {
         return __awaiter(this, void 0, void 0, function () {
-            var db, collection, result;
+            var db, collection, cursorDB, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("inside get");
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
-                        console.log("get: key = " + username);
-                        return [4 /*yield*/, collection.findOne({ 'username': username })];
+                        console.log("findMatch: city = " + city);
+                        return [4 /*yield*/, collection.find({ "value.a": city })];
                     case 1:
+                        cursorDB = _a.sent();
+                        return [4 /*yield*/, cursorDB.toArray()];
+                    case 2:
                         result = _a.sent();
-                        console.log("get: returned " + JSON.stringify(result));
-                        if (result) {
-                            return [2 /*return*/, result.value];
+                        // let result = cursorDB;
+                        if (result !== null) {
+                            console.log("Found " + result.length + " assistant in " + city);
+                            return [2 /*return*/, result];
                         }
                         else {
                             return [2 /*return*/, null];
@@ -196,14 +200,14 @@ var AssistantDB = /** @class */ (function () {
         });
     };
     // Check if a single document exists using: findOne() in "get" method
-    AssistantDB.prototype.isFound = function (username) {
+    AssistantDB.prototype.isFound = function (city) {
         return __awaiter(this, void 0, void 0, function () {
             var v;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("isFound: key = " + username);
-                        return [4 /*yield*/, this.get(username)];
+                        console.log("isFound: key = " + city);
+                        return [4 /*yield*/, this.get(city)];
                     case 1:
                         v = _a.sent();
                         console.log("is found result = " + v);

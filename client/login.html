@@ -62,7 +62,7 @@
     </head>
     <body>
         <div class= "form-container">
-            <form action="/dosth" method="POST">
+            <form action="/login" method="POST">
                 <ul class= "list">
                     <li><h1 style="font-family: Arial, Helvetica, sans-serif;">Member Login</h1></li>
                     <li><input type="text" name='username' placeholder="Username" id="username"></li>
@@ -70,7 +70,7 @@
                     <li><input type= "text" name= "lName" placeholder="Last Name" id ="lName"></li>
                     <li><input type= "text" name= "addr" placeholder="Home Address" id="address"></li>-->
                     <li><input type= "password" name= "password" placeholder="Password" id="pw"></li>
-                    <li><button type="submit" class="login-button" >Login</button></li>
+                    <li><button type="submit" class="login-button" onclick="userLogin()">Login</button></li>
                     <li><p id="output"></p></li>
                     <li><a href= "/passwordforget.html" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif; color: red; text-decoration: none">Forget Password?</a></li>
                     <li style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">Don't have an account yet?</li>

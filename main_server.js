@@ -1,8 +1,10 @@
 'use-strict';
 "use strict";
 exports.__esModule = true;
-var customerdb_1 = require("./customerdb");
+var customerdb_1 = require("./Database/customerdb");
+var assistantdb_1 = require("./Database/assistantdb");
 var server_1 = require("./server");
-var theDatabase = new customerdb_1.CustomerDB('QuanPham99');
-var theServer = new server_1.MyServer(theDatabase);
+var customerDatabase = new customerdb_1.CustomerDB('QuanPham99');
+var assistantDatabase = new assistantdb_1.AssistantDB('QuanPham99');
+var theServer = new server_1.MyServer(customerDatabase, assistantDatabase);
 theServer.listen(process.env.PORT);
