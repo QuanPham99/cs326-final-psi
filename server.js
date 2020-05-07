@@ -61,9 +61,18 @@ var MyServer = /** @class */ (function () {
         // this.server.use('/', express.static("./client"));
         this.server.use('/', express.static("./client"));
         this.server.use(express.json());
+        // this.server.use('/login', function(request, response) {
+        //     response.sendFile(path.join(__dirname + '/client/login.html'));
+        // });
         // Set handlers for a route
-        // Handle the login page
         this.router.post('/find', [this.errorHandler.bind(this), this.matchHandler.bind(this)]);
+        // Handler for login page
+        this.router.post('/login', function (request, response) {
+            response.redirect('/');
+        });
+        this.router.post('/signup', function (request, response) {
+            response.redirect('/');
+        });
         // Set a fall through handler if nothing matches
         this.router.post("*", function (request, response) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
