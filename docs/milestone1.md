@@ -32,7 +32,7 @@ User Interaction:
         * The disabilities person can cancel the person if after they read the profile while waiting. 
 
     + Upon loggin in, the users will also have the options of fogetting the password, and they will choose to input their email address to retrieve their account back.
-    ![](../img/Forget&#32;pass.png)
+    ![](../client/img/Forget&#32;pass.png)
 
     + There will be a notification when the assistance accept the tasks, and their info will be briefly displayed (accessible for people with disabilities) (to be figured out later)
   
@@ -40,7 +40,7 @@ User Interaction:
   
     + This is the overall layout of the website, we are working on how to input the map into out website, as well as fixing the background color (due to time constraint, so this would take sometimes before the deadline)
     
-    ![](../img/Homepage.png)
+    ![](../client/img/Homepage.png)
 
 
 - Person in charge of the html+css:
